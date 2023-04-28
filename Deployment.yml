@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskdepl
+  labels:
+    app: monitor
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: ecrimage
+        image: 628387237007.dkr.ecr.ap-south-1.amazonaws.com/flask-repo:latest
+        ports:
+        - containerPort: 5000
